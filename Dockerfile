@@ -18,7 +18,8 @@ RUN set -ex \
     && apt-get update \
     && apt-get install -y \
         ansible \
-    && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* 
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* \
+    && ansible --version
 
 # OpenSSH
 RUN set -ex \
