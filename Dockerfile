@@ -1,15 +1,20 @@
 FROM majid7221/java:openjdk-8
 
-# lftp
+# Useful tools 
+# lftp, netcat, jq, python3-requests
 RUN set -ex \
     && apt-get update \
     && apt-get install -y \
         lftp \
         netcat \
+        jq \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* 
 
 # ansible
+ENV ANSIBLE_KEY 93C4A3FD7BB9C367
 RUN set -ex \
+    && echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" > /etc/apt/sources.list.d/ansible.list \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $ANSIBLE_KEY \
     && apt-get update \
     && apt-get install -y \
         ansible \
